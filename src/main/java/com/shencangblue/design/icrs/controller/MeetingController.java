@@ -229,10 +229,10 @@ public class MeetingController {
      */
     @RequestMapping("/checkMeetBegin")
     public Result checkMeetBegin() {
-        Iterable<Meeting> meetings = meetingService.findAllByStartTimeAfterAndEndTimeBefore(nowTime, nowTime);
         nowTime = new Timestamp(new Date().getTime());
+        Iterable<Meeting> meetings = meetingService.findAllByStartTimeAfterAndEndTimeBefore(nowTime);
         for (Meeting meeting : meetings) {
-            meeting.setStatus(0);
+            meeting.setStatus(2);
         }
         meetingService.saveAll(meetings);
         return ResultFactory.buildSuccessResult("更新状态成功");
